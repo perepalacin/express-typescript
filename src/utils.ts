@@ -55,7 +55,7 @@ const toNewWatchEntry = (object: any): NewWatchEntry => {
     const newWatchEntry: NewWatchEntry = {
         //First we parse the comment to make sure its a string;
         description: parseDescription(object.description),
-        created_at: parseDate(object.date),
+        created_at: parseDate(object.created_at),
         brand: parseBrand(object.brand),
         mechanism: parseMechanism(object.mechanism),
         name: parseName(object.name),
