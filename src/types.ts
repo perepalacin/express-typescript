@@ -1,17 +1,26 @@
-export enum Gender {
-    Male = "male",
-    Female = "female"
+export enum Brand {
+    Tissot = "Tissot",
+    Seiko = "Seiko",
+    Citizen = "Citizen",
+    Casio = "Casio",
+    Orient = "Orient",
 }
 
-export interface DiaryEntry {
-    id: number,
-    date: string,
-    userName: string,
-    gender: Gender,
-    comment: string,
+export enum Mechanism {
+    Quarz = "Quarz",
+    Automatic = "Automatic"
 }
 
-// export type NonSensitiveInfoDiaryEntry = Pick<DiaryEntry, "id" | "date" | "gender">;
-export type NonSensitiveInfoDiaryEntry = Omit<DiaryEntry, 'comment'>;
+export interface WatchEntry {
+    id: string,
+    created_at: string,
+    name: string,
+    description: string,
+    brand: Brand,
+    mechanism: Mechanism,
+}
 
-export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
+// export type SummarizedWatchEntry = Pick<DiaryEntry, "id" | "name" | "created_at">;
+export type SummarizedWatchEntry = Omit<WatchEntry, 'description'>;
+
+export type NewWatchEntry = Omit<WatchEntry, 'id'>;

@@ -1,5 +1,5 @@
 import express from 'express'
-import diaryRouter from './routes/diaries';
+import watchRouter from './routes/watches';
 
 const app = express()
 app.use(express.json()) //Middleware to transform req.body into a json
@@ -11,7 +11,7 @@ app.get('/ping', (_req, res) => {
     res.send('pong');
 });
 
-app.use('/api/diaries', diaryRouter);
+app.use('/api/watches', watchRouter);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)

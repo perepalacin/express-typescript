@@ -1,35 +1,46 @@
-import { Gender, NewDiaryEntry } from "./types";
+import { Brand, Mechanism, NewWatchEntry } from "./types";
 
-const parseComment = (commentFromRequest: any): string => {
-    if (!isString(commentFromRequest)) {
-        throw new Error('Incorrect or missing comment');
+const parseDescription = (descriptionFromRequest: any): string => {
+    if (!isString(descriptionFromRequest)) {
+        throw new Error('Incorrect or missing description');
     }
-    return commentFromRequest;
+    return descriptionFromRequest;
 }
 
 const parseDate = (dateFromRequest: any): string => {
     if (!isDate(dateFromRequest) || !isString(dateFromRequest)) {
-        throw new Error('Incorrect or missing date'); 
+        throw new Error('Incorrect or missing creation date'); 
     }
     return dateFromRequest;
 }
 
-const parseGender = (genderFromRequest: any): Gender => {
-    if(!isString(genderFromRequest || !isGender(genderFromRequest))) {
-        throw new Error('Incorrect or missing gender');
+const parseBrand = (brandFromRequest: any): Brand => {
+    if(!isString(brandFromRequest || !isBrand(brandFromRequest))) {
+        throw new Error('Incorrect or missing brand');
     }
-    return genderFromRequest
+    return brandFromRequest
 }
 
-const parseUserName = (userNameFromRequest: any): string => {
-    if (!isString(userNameFromRequest)) {
+const parseMechanism = (mechanismFromRequest: any): Mechanism => {
+    if(!isString(mechanismFromRequest || !ismMechanism(mechanismFromRequest))) {
+        throw new Error('Incorrect or missing mechanism');
+    }
+    return mechanismFromRequest
+}
+
+const parseName = (nameFromRequest: any): string => {
+    if (!isString(nameFromRequest)) {
         throw new Error ('Incorrect or missing username');
     }
-    return userNameFromRequest;
+    return nameFromRequest;
 }
 
-const isGender = (params: any): boolean => {
-    return Object.values(Gender).includes(params);
+const isBrand = (params: any): boolean => {
+    return Object.values(Brand).includes(params);
+}
+
+const ismMechanism = (params: any): boolean => {
+    return Object.values(Mechanism).includes(params);
 }
 
 const isDate = (date: string): boolean => {
@@ -40,15 +51,16 @@ const isString = (string: string): boolean => {
     return (typeof string === "string") 
 }
 
-const toNewDiaryEntry = (object: any): NewDiaryEntry => {
-    const newDiaryEntry: NewDiaryEntry = {
+const toNewWatchEntry = (object: any): NewWatchEntry => {
+    const newWatchEntry: NewWatchEntry = {
         //First we parse the comment to make sure its a string;
-        comment: parseComment(object.comment),
-        date: parseDate(object.date),
-        gender: parseGender(object.gender),
-        userName: parseUserName(object.userName),
+        description: parseDescription(object.description),
+        created_at: parseDate(object.date),
+        brand: parseBrand(object.brand),
+        mechanism: parseMechanism(object.mechanism),
+        name: parseName(object.name),
     }
-    return newDiaryEntry;
+    return newWatchEntry;
 }
 
-export default toNewDiaryEntry;
+export default toNewWatchEntry;
